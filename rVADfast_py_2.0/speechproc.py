@@ -26,7 +26,12 @@ def speech_wave(fileName_):
      elif sig.dtype == 'int32':
         nb = 32 # -> 32-bit wav files
      max_nb = float(2 ** (nb - 1))
-     sig = sig / (max_nb + 1.0)  
+     sig = sig / (max_nb + 1.0)
+
+     # if stereo, convert to mono
+     if sig.shape[1] > 1:
+         sig = sig[:,0]
+
      return fs, sig
  
 def enframe(speech, fs, winlen, ovrlen):

@@ -29,6 +29,12 @@ end
 % [data,fs]=wavread(finwav);
 % [data, fs]=aurora2read(finwav);
 
+% convert stereo to mono
+datasize = size(data);
+if datasize(2) == 2
+    data = data(:,1);
+end
+
 % Parameter setting
 ENERGYFLOOR = exp(-50);
 flen=floor(fs/40); % 25ms frame length 
